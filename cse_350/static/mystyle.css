@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:900|Raleway:400,400i,700,700i);
+
+button:hover {
+  box-shadow: 10px 0px 60px rgb(0, 0, 0);
+}
+
+.list {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 600px;
+}
+
+.gradient-list {
+  margin-top: 10%;
+}
+
+.gradient-list li {
+  margin-bottom: 15px;
+  border: solid 0.7px #a6a6a6;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 1.5rem;
+  background-image: linear-gradient(to right, rgb(198, 255, 203) , rgb(255, 255, 207));
+  cursor: pointer;
+}
+
+.gradient-list li:hover {
+  padding-left: 40px;
+  transition: 0.3s;
+}
+.link{
+  text-align: center;
+}

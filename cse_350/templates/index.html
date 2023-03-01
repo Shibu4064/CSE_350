@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div>
+    <div position: relative;>
+        <img style="opacity: .4;filter: blur(4px)" src="../static/hlww.jpeg" alt="" width="100%">
+    </div>
+    <div style="opacity: 1; margin-top: -40%;">
+       <button class="one" style="  position: absolute; left:35%; height:50px; width:200px; background-color:#ffffff; color:black; cursor:pointer; font-size:1.4rem; border-radius:5px; border-style:none; font-weight:bolder"> <a style="text-decoration: none; color:black" href="#uses">How to use...?</a> </button>
+       <button style=" position: absolute; left:50%; height:50px; width:200px; background-color:#ffffff; color:black; cursor:pointer; font-size:1.4rem; border-radius:5px; border-style:none; font-weight:bolder"> <a style="text-decoration: none; color:black" href="#all">Get Started...!! </a></button>
+    </div>
+</div>
+<div id="uses" style="margin-top: 50%;">
+    <div style="margin: auto; width: 50%;" class="heading" >
+        <h1 style="font-size: 3.4rem;">How to use?</h1>
+        <h1 style="font-size: 1.4rem; font-weight:300">Follow the instructions.</h1>
+    </div>
+
+    <div class="list">
+        <ol class="gradient-list">
+            <li>First open our website.</li>
+            <li>Click on the "Get started" button.</li>
+            <li>Select or browse an image.</li>
+            <li>Then have the number plate image and number plate number.</li>
+        </ol>
+    </div>
+</div>
+
+
+<div id="all">
+   <div class="container">
+    <br><br>
+    <form action="#" method="POST" enctype="multipart/form-data">
+        <div class="input-group">
+            <input id="image-file" type="file" class="form-control" name="image_name" required onchange="readImage()">
+            <input type="submit" value="Upload" class="btn btn-outline-secondary">
+        </div>
+    </form>
+   </div>
+
+   {% if upload %}
+
+   <div class="container">
+    <br><br>
+    <table>
+        <tr>
+            <td>
+                <div >
+                <img class="rounded float-left img-fluid" src="/static/upload/{{ upload_image }}" alt="">
+                </div>
+            </td>
+            <td>
+                    <img width="100%" style="position:relative;margin-left:20%" class="rounded float-right img-fluid" src="/static/upload/{{ upload_image }}" alt="">
+                    <p style="width: 300px;position:absolute; top:99%;margin-left:300px;font-size:25px;font-weight:bold;color:black;background:yellow; border-radius: 10px">{{numb}}</p>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table style="border: solid black; width: 100%;">
+        <tr style="border: solid black;">
+            <th>Cropped License PLate Image</th>
+            <th>Text</th>
+        </tr>
+        <tr style="border: solid black;">
+            <td>
+                <img class="img-fluid" src="/static/roi/{{ upload_image }}" alt="">
+            </td>
+            <td style="background-color:aqua;">
+                <h1 class="display-8"> {{ numb }}</h1>
+            </td>
+        </tr>
+    </table>
+   </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
