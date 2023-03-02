@@ -1,5 +1,5 @@
 # CSE_350
-# project- Vehicles Number Plate Detection and Recognition
+# Project Title - Vehicles Number Plate Detection and Recognition.
 Welcome to our project
 
 We took images of the front or back side of the vehicles in which the numberplate is visible from a finite distance. By running a deep learning model
