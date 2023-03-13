@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumberPlate OCR</title>
+    <link rel="stylesheet" href="../static/mystyle.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <h1 class="display">
+                  Automatic Number Plate Detection
+                </h1>
+            </a>
+        </div>
+    </nav>
+
+    {% block body %}
+
+    {% endblock %}
+    <footer style="height:120px; background: black; align-items:center; display:flex; align-items: cnter; justify-content:center; margin-top:70px " >
+        <hr>
+        <a class="link" href="https://www.alpca.org/"  style="text-decoration: none ; text-decoration:none; color:white; text-align:center " > Automobile License Plate Collectors Association </a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script>
+        function readImage(e) {
+            let photo = document.getElementById("image-file").files[0];
+            let formData = new FormData();
+
+            formData.append("image_name", photo);
+            fetch('/upload', { method: "POST", body: formData }).then((res)=>{
+                if(res.ok){
+                    console.log("Image uploaded.")
+                }else{
+                    console.log("Image not uploaded.");
+                }
+            })
+        }
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+<script>
+    function readImage(e) {
+        let photo = document.getElementById("image-file").files[0];
+        let formData = new FormData();
+
+        formData.append("image_name", photo);
+        fetch('/upload', { method: "POST", body: formData }).then((res)=>{
+            if(res.ok){
+                console.log("Image uploaded.")
+            }else{
+                console.log("Image not uploaded.");
+            }
+        })
+    }
+
+    function readcampImage(e) {
+        var file =  document.getElementById("base64image").src;
+        const formdata = new FormData();
+        formdata.append("image_name", file);
+        fetch('/uploadCamp', { method: "POST", body: formdata }).then((res)=>{
+            if(res.ok){
+                console.log("Image uploaded.");
+                window.location.reload();
+            }else{
+                console.log("Image not uploaded.");
+            }
+        })
+    }
+</script>
+
+<!-- Code to handle taking the snapshot and displaying it locally -->
+<script language="JavaScript">
+
+ // Configure a few settings and attach camera
+
+function take_snapshot() {
+   // play sound effect
+   shutter.play();
+
+   // take snapshot and get image data
+   Webcam.snap( function(data_uri) {
+      // display results in page
+      document.getElementById('base64image').src =data_uri;
+    });
+    
+}
+</script>
+</body>
+</html>

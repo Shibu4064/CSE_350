@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- CSS -->
+<style>
+    #my_camera{
+        width: 320px;
+        height: 240px;
+        border: 1px solid black;
+    }
+    </style>
+<body>
+     <!-- -->
+     <div id="my_camera"></div>
+    <input type=button value="Take Snapshot" onClick="take_snapshot()">
+
+   <div id="results" ></div>
+   <form action="#" method="POST" enctype="multipart/form-data">
+   <div class="input-group">
+       <input id="image-file" type="file" class="form-control" name="image_name" required onchange="readImage()" hidden>
+       <input type="submit" value="Upload" class="btn btn-outline-info">
+   </div>
+</form>
+    
+</body>
+
+<!-- Script -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+<script>
+    function readImage(e) {
+        let photo = document.getElementById("image-file").files[0];
+        let formData = new FormData();
+
+        formData.append("image_name", photo);
+        fetch('/upload', { method: "POST", body: formData }).then((res)=>{
+            if(res.ok){
+                console.log("Image uploaded.")
+            }else{
+                console.log("Image not uploaded.");
+            }
+        })
+    }
+</script>
+
+<!-- Code to handle taking the snapshot and displaying it locally -->
+<script language="JavaScript">
+
+ // Configure a few settings and attach camera
+ Webcam.set({
+     width: 320,
+     height: 240,
+     image_format: 'jpeg',
+     jpeg_quality: 90
+ });
+ Webcam.attach( '#my_camera' );
+// preload shutter audio clip
+ var shutter = new Audio();
+ shutter.autoplay = true;
+ shutter.src = navigator.userAgent.match(/Firefox/) ? 'shutter.ogg' : 'shutter.mp3';
+
+function take_snapshot() {
+   // play sound effect
+   shutter.play();
+
+   // take snapshot and get image data
+   Webcam.snap( function(data_uri) {
+      // display results in page
+      document.getElementById('results').innerHTML =
+          '<img src="'+data_uri+'"/>';
+    });
+    document.getElementById('image-file').value=data_uri;
+}
+</script>
+</html>
